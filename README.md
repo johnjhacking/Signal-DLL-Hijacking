@@ -4,7 +4,7 @@ Multiple instances of DLL planting exist, and a threat actor can plant DLLs that
 # Steps to Replicate
 1. First, create a malicious DLL. Signal references a bunch of non-existent DLLs, so for this example, I used `cryptbase.dll`. You can use [this repository](https://github.com/tothi/dll-hijack-by-proxying) to build the DLL, but I'll simplify the steps for you:
    * Clone the repo.
-   * Modify the `payload.c` file as you see fit.
+   * Modify the `cryptbase.c` file as you see fit.
    * Copy `C:\Windows\System32\cryptbase.dll` into the `dll-hijack-by-proxying` directory as `cryptbase_original.dll`.
    * Create the exports using the `gen_def.py` script in the `dll-hijack-by-proxying` directory.
 
