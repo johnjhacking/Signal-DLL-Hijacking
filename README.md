@@ -1,5 +1,5 @@
 # Summary 
-Multiple instances of DLL planting exist, and a threat actor can plant DLLs that don't exist but are referenced by the application 
+Multiple instances of DLL planting exist, and a threat actor can plant DLLs that don't exist but are referenced by the application. 
 
 # Steps to Replicate
 1. First, create a malicious DLL. Signal references a bunch of non-existent DLLs, so for this example, I used `cryptbase.dll`. You can use [this repository](https://github.com/tothi/dll-hijack-by-proxying) to build the DLL, but I'll simplify the steps for you:
