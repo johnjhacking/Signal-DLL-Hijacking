@@ -1,5 +1,5 @@
-# CVE-2023-XXXXX
-## CVE Description
+# Summary 
+Multiple instances of DLL planting exist, and a threat actor can plant DLLs that don't exist but are referenced by the application 
 
 # Steps to Replicate
 1. First, create a malicious DLL. Signal references a bunch of non-existent DLLs, so for this example, I used `cryptbase.dll`. You can use [this repository](https://github.com/tothi/dll-hijack-by-proxying) to build the DLL, but I'll simplify the steps for you:
@@ -15,7 +15,7 @@
    * Run the following command if you're compiling for x64 Windows:
 
     ```
-    compilex86_64-w64-mingw32-gcc -shared -o cryptbase.dll cryptbase.c cryptbase.def -s
+    compile x86_64-w64-mingw32-gcc -shared -o cryptbase.dll cryptbase.c cryptbase.def -s
     ```
 
 2. Now you've got your malicious DLL. Copy `cryptbase.dll` and `cryptbase_orig.dll` into the `%LocalAppData\Programs\signal-desktop` folder.
