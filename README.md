@@ -21,7 +21,7 @@
 2. Now you've got your malicious DLL. Copy `cryptbase.dll` and `cryptbase_orig.dll` into the `%LocalAppData\Programs\signal-desktop` folder.
 3. Run Signal, and the code will execute. Here's a cute calculator PoC example:
    
-    ![Calculator PoC](placeholder)
+    ![Calculator PoC](https://raw.githubusercontent.com/johnjhacking/placeholder/main/1.png?token=GHSAT0AAAAAABZSW66OBKS446AIMVFSEHF6ZASOIUQ)
 
 # Turning up the Heat
 If you're like me, simply popping the calculator isn't enough. Let's chain this as an LNK -> HTA -> Your Payload. I mean, local vulnerabilities are totally not exploitable...right....right??? In all actuality, the argument would be that a user who clicks an emailed LNK could easily click another payload. That's not the point. Signal references non-existent DLL files, and you can chain this against as a bypass against something like AppLocker or a default deny tool, leveraging the trust of the product as a "safe" messenger. Anyway, let's get to it.
@@ -34,7 +34,7 @@ If you're like me, simply popping the calculator isn't enough. Let's chain this 
 
     It should look something like this:
    
-    ![LNK PoC](placeholder)
+    ![LNK PoC](https://raw.githubusercontent.com/johnjhacking/placeholder/main/2.png?token=GHSAT0AAAAAABZSW66P7OWYJP4BVQXBRA5GZASOJGQ)
 
 2. Host your `cryptbase.dll` and `cryptbase_orig.dll` files.
 3. Modify the code in the `poc.hta` file within this GitHub repo to utilize the URLs of your hosted DLL files.
@@ -43,4 +43,4 @@ If you're like me, simply popping the calculator isn't enough. Let's chain this 
 6. Now, when the victim runs Signal, your malicious DLL will run. Phishing ftw.
 7. You can use whatever you want, but for a quick test, I hosted an HTA server to see if my HTA would drop the DLLs that execute an HTA LOL, so in my case, the chain was LNK -> HTA drops DLLs -> User runs Signal -> DLL executes remote HTA. In a non-poc scenario, I'd swap the HTA payload out with a crypted DLL, which would be better.
    
-    ![RCE Proof](placeholder)
+    ![RCE Proof](https://raw.githubusercontent.com/johnjhacking/placeholder/main/3.png?token=GHSAT0AAAAAABZSW66OWR6EFTYZEPV3LOHCZASOJSQ)
