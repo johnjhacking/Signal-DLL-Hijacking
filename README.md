@@ -41,6 +41,6 @@ If you're like me, simply popping the calculator isn't enough. Let's chain this 
 4. Host `poc.hta` on your domain.
 5. Run the LNK shortcut and watch as the DLL files are dropped into the `%LocalAppData\Programs\signal-desktop` folder.
 6. Now, when the victim runs Signal, your malicious DLL will run. Phishing ftw.
-7. You can use whatever you want, but for a quick test, I hosted an HTA server to see if my HTA would drop the DLLs that execute an HTA, mostly for the nonsense of the chain, so in my case, the chain was LNK -> HTA drops DLLs -> User runs Signal -> DLL executes remote HTA. In a live scenario, I'd swap the HTA payload out with a FUD DLL payload compiled with Cobalt Strike or Brute Rat shellcode and add persistence, depending on the EDR i'm up against.
+7. You can use whatever you want, but for a quick test, I hosted an HTA server to see if my HTA would drop the DLLs that execute an HTA, mostly for the nonsense of the chain, so in my case, the chain was LNK -> HTA drops DLLs -> User runs Signal -> DLL executes remote HTA. In a live scenario, I'd swap the HTA payload out with a FUD DLL payload, built with compiled Cobalt Strike or Brute Rat shellcode with persistence, depending on the EDR i'm up against.
    
     ![RCE Proof](https://github.com/johnjhacking/Signal-DLL-Hijacking/blob/main/3.png?raw=true)
