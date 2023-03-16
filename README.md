@@ -24,7 +24,7 @@
     ![Calculator PoC](https://raw.githubusercontent.com/johnjhacking/placeholder/main/1.png?token=GHSAT0AAAAAABZSW66OBKS446AIMVFSEHF6ZASOIUQ)
 
 # Turning up the Heat
-If you're like me, simply popping the calculator isn't enough. Let's chain this as an LNK -> HTA -> Your Payload. I mean, local vulnerabilities are totally not exploitable...right....right??? In all actuality, the argument would be that a user who clicks an emailed LNK could easily click another payload. That's not the point. Signal references non-existent DLL files, and you can chain this against as a bypass against something like AppLocker or a default deny tool, leveraging the trust of the product as a "safe" messenger. Anyway, let's get to it.
+If you're like me, simply popping the calculator isn't enough. Let's chain this as an LNK -> HTA -> Your Payload. Signal references non-existent DLL files, and you can chain this against as a bypass against something like AppLocker or a default deny tool, leveraging the trust of the product as a "safe" messenger.
 
 1. Create an LNK shortcut, and change the target to the following:
 
@@ -41,6 +41,6 @@ If you're like me, simply popping the calculator isn't enough. Let's chain this 
 4. Host the HTA on your domain.
 5. Run the LNK shortcut and watch as the DLL files are dropped into the `%LocalAppData\Programs\signal-desktop` folder.
 6. Now, when the victim runs Signal, your malicious DLL will run. Phishing ftw.
-7. You can use whatever you want, but for a quick test, I hosted an HTA server to see if my HTA would drop the DLLs that execute an HTA LOL, so in my case, the chain was LNK -> HTA drops DLLs -> User runs Signal -> DLL executes remote HTA. In a non-poc scenario, I'd swap the HTA payload out with a crypted DLL, which would be better.
+7. You can use whatever you want, but for a quick test, I hosted an HTA server to see if my HTA would drop the DLLs that execute an HTA LOL, so in my case, the chain was LNK -> HTA drops DLLs -> User runs Signal -> DLL executes remote HTA. In a non-poc scenario, I'd swap the HTA payload out with a custom DLL payload and cut out the secondary remote call.
    
     ![RCE Proof](https://raw.githubusercontent.com/johnjhacking/placeholder/main/3.png?token=GHSAT0AAAAAABZSW66OWR6EFTYZEPV3LOHCZASOJSQ)
