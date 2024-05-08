@@ -1,5 +1,5 @@
 ## EDIT:
-2024/05/08 --> It's been brought to my attention that "cryptbase.dll" no longer works, so in short, Signal said this wasn't a vulnerability yet patched something that wasn't a vulnerability. I've updated this repo to use dbghelp.dll instead. Github's find and replace function is very useful. I've also added the gen_def.py script for your ease of use, huge shouts to Tothi for that.
+2024/05/08 --> It's been brought to my attention that "cryptbase.dll" no longer works, so in short, Signal said this wasn't a vulnerability (well, more or less they ignored the drop outright - or so I thought) yet patched it. I've updated this repo to use dbghelp.dll instead. Github's find and replace function is very useful. I've also added the gen_def.py script for your ease of use, huge shouts to Tothi for that.
 
 # Summary 
 Multiple instances of DLL planting exist, and a threat actor can plant DLLs that don't exist but are referenced by the application. 
