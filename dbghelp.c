@@ -5,7 +5,7 @@ void Payload()
 {
   STARTUPINFO si;
   PROCESS_INFORMATION pi;
-  
+  // Be sure to escape paths in your command, so for instance, pop calc would be C:\\Windows\\System32\\calc.exe
   char cmd[] = "your command here";
   
   ZeroMemory(&si, sizeof(si));
