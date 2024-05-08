@@ -6,7 +6,7 @@ Multiple instances of DLL planting exist, and a threat actor can plant DLLs that
 
 # Steps to Replicate
 1. First, create a malicious DLL. Signal references many non-existent DLLs, but several of the DLLs are native to Windows. For this example, I used `dbghelp.dll`. You can use [this repository](https://github.com/tothi/dll-hijack-by-proxying) to build the DLL, but I'll simplify their steps for you, by also including the definition generator in this repo, meaning you don't have to clone that repo if you don't want to:
-   * Clone the repo.
+   * Clone this repo.
    * Modify the `dbghelp.c` file in this repo as you see fit - note that this is nothing more than the payload.
    * Copy `C:\Windows\System32\dbghelp.dll` into the `dll-hijack-by-proxying` directory as `dbghelp_original.dll`.
    * Create the exports using the `gen_def.py` script
