@@ -1,24 +1,27 @@
+## EDIT:
+2024/05/08 --> It's been brought to my attention that "cryptbase.dll" no longer works, so in short, Signal said this wasn't a vulnerability yet patched something that wasn't a vulnerability. I've updated this repo to use dbghelp.dll instead. Github's find and replace function is very useful. I've also added the gen_def.py script - 
+
 # Summary 
 Multiple instances of DLL planting exist, and a threat actor can plant DLLs that don't exist but are referenced by the application. 
 
 # Steps to Replicate
-1. First, create a malicious DLL. Signal references many non-existent DLLs, but several of the DLLs are native to Windows. For this example, I used `cryptbase.dll`. You can use [this repository](https://github.com/tothi/dll-hijack-by-proxying) to build the DLL, but I'll simplify the steps for you:
+1. First, create a malicious DLL. Signal references many non-existent DLLs, but several of the DLLs are native to Windows. For this example, I used `dbghelp.dll`. You can use [this repository](https://github.com/tothi/dll-hijack-by-proxying) to build the DLL, but I'll simplify their steps for you, by also including the definition generator in this repo:
    * Clone the repo.
-   * Modify the `cryptbase.c` file in this repo as you see fit - note that this is nothing more than the payload.
-   * Copy `C:\Windows\System32\cryptbase.dll` into the `dll-hijack-by-proxying` directory as `cryptbase_original.dll`.
-   * Create the exports using the `gen_def.py` script in the `dll-hijack-by-proxying` directory.
+   * Modify the `dbghelp.c` file in this repo as you see fit - note that this is nothing more than the payload.
+   * Copy `C:\Windows\System32\dbghelp.dll` into the `dll-hijack-by-proxying` directory as `dbghelp_original.dll`.
+   * Create the exports using the `gen_def.py` script
 
     ```
-    python3 gen_def.py cryptbase_orig.dll > cryptbase.def
+    python3 gen_def.py dbghelp_orig.dll > dbghelp.def
     ```
    
    * Run the following command if you're compiling for x64 Windows:
 
     ```
-    x86_64-w64-mingw32-gcc -shared -o cryptbase.dll cryptbase.c cryptbase.def -s
+    x86_64-w64-mingw32-gcc -shared -o dbghelp.dll dbghelp.c dbghelp.def -s
     ```
 
-2. Now you've got your malicious DLL. Copy `cryptbase.dll` and `cryptbase_orig.dll` into the `%LocalAppData\Programs\signal-desktop` folder.
+2. Now you've got your malicious DLL. Copy `dbghelp.dll` and `dbghelp_orig.dll` into the `%LocalAppData\Programs\signal-desktop` folder.
 3. Run Signal, and the code will execute. Here's a cute calculator PoC example:
    
     ![Calculator PoC](https://github.com/johnjhacking/Signal-DLL-Hijacking/blob/main/1.png?raw=true)
@@ -36,7 +39,7 @@ If you're like me, simply popping the calculator isn't enough. Let's chain this 
    
     ![LNK PoC](https://github.com/johnjhacking/Signal-DLL-Hijacking/blob/main/2.png?raw=true)
 
-2. Host your `cryptbase.dll` and `cryptbase_orig.dll` files.
+2. Host your `dbghelp.dll` and `dbghelp_orig.dll` files.
 3. Modify the code in the `poc.hta` file within this GitHub repo to utilize the URLs of your hosted DLL files.
 4. Host `poc.hta` on your domain.
 5. Run the LNK shortcut and watch as the DLL files are dropped into the `%LocalAppData\Programs\signal-desktop` folder.
