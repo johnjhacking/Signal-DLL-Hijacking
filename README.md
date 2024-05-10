@@ -1,5 +1,6 @@
 ## EDIT:
-2024/05/08 --> It's been brought to my attention that "cryptbase.dll" no longer works, so in short, Signal said this wasn't a vulnerability (well, more or less they ignored the drop outright - or so I thought) yet patched it. I've updated this repo to use dbghelp.dll instead. Github's find and replace function is very useful. I've also added the gen_def.py script for your ease of use, huge shouts to Tothi for that.
+2024/05/09 --> While I've changed the dll from cryptbase.dll to dbghelp.dll, you can still create a malicious cryptbase.dll but if you go that route, you'll have to drop it in:
+%LocalAppData%\Programs\signal-desktop\resources\app.asar.unpacked\node_modules\@signalapp\libsignal-client\prebuilds\win32-x64 folder rather than %LocalAppData%\Programs\signal-desktop
 
 # Summary 
 Multiple instances of DLL planting exist, and a threat actor can plant DLLs that don't exist but are referenced by the application. 
@@ -21,7 +22,7 @@ Multiple instances of DLL planting exist, and a threat actor can plant DLLs that
     x86_64-w64-mingw32-gcc -shared -o dbghelp.dll dbghelp.c dbghelp.def -s
     ```
 
-2. Now you've got your malicious DLL. Copy `dbghelp.dll` and `dbghelp_orig.dll` into the `%LocalAppData\Programs\signal-desktop` folder.
+2. Now you've got your malicious DLL. Copy `dbghelp.dll` and `dbghelp_orig.dll` into the `%LocalAppData%\Programs\signal-desktop` folder.
 3. Run Signal, and the code will execute. Here's a cute calculator PoC example:
    
     ![Calculator PoC](https://github.com/johnjhacking/Signal-DLL-Hijacking/blob/main/1.png?raw=true)
