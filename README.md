@@ -28,6 +28,8 @@ Multiple instances of DLL planting exist, and a threat actor can plant DLLs that
     ![Calculator PoC](https://github.com/johnjhacking/Signal-DLL-Hijacking/blob/main/1.png?raw=true)
 
 # Turning up the Heat
+EDIT: It's still a cool chain and it "may" bypass AppLocker, depending on your final DLL payload - but it's most certainly not going to bypass Carbon Black Bit9. Still, doesn't matter as I doubt they'd be running Signal on an enterprise computer anyway.
+
 If you're like me, simply popping the calculator isn't enough. Let's chain this as an LNK -> HTA -> Your Payload. You might be wondering what the purpose of building this type of chain serves. Simple: you can chain this as a bypass against something like AppLocker or a default deny tool, leveraging the trust of the product as a safe messenger. In addition, an LNK pretext will allow you to get the user to download the DLLs into the appropriate folder.
 
 1. Create an LNK shortcut, and change the target to the following:
